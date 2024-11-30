@@ -1,0 +1,31 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('caisses', function (Blueprint $table) {
+            $table->id();
+            $table->string('name'); // Name of the cash register
+            $table->decimal('total_entry', 10, 2)->default(0); // Total amount added
+            $table->decimal('total_exit', 10, 2)->default(0); // Total amount deducted
+            $table->decimal('balance', 10, 2)->default(0); // Current balance
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('caisses');
+    }
+};

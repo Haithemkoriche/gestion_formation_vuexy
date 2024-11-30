@@ -4,6 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceEntryController;
+use App\Http\Controllers\CaisseController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\StatusController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -19,3 +22,10 @@ Route::post('/services/{serviceId}/entries', [ServiceEntryController::class, 'st
 Route::get('/entries/{entryId}', [ServiceEntryController::class, 'show']); // Afficher un enregistrement spécifique
 Route::put('/entries/{entryId}', [ServiceEntryController::class, 'update']); // Mettre à jour un enregistrement spécifique
 Route::delete('/entries/{entryId}', [ServiceEntryController::class, 'destroy']); // Supprimer un enregistrement spécifique
+
+Route::get('/caisses', [CaisseController::class, 'index'])->name('caisses.index');
+// Route::post('/transactions', [CaisseController::class, 'createTransaction'])->name('transactions.create');
+Route::get('/clients', [CaisseController::class, 'getClients']);
+Route::post('/caisses/transaction', [CaisseController::class, 'createTransaction']);
+Route::apiResource('statuses', StatusController::class);
+Route::apiResource('payments', PaymentController::class);
